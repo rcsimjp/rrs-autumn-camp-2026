@@ -319,10 +319,10 @@
 
 
 #   # LifeTime用
-#   D_NOISE = 0.1 
-#   D_K_B = 0.00025 
+#   D_NOISE = 0.1
+#   D_K_B = 0.00025
 #   D_K_C = 0.00035
-#   D_L_B = 0.01 
+#   D_L_B = 0.01
 #   D_L_C = 0.01
 
 #   # 生存時間を計算するメソッド
@@ -375,7 +375,7 @@ class SampleHumanDetector(HumanDetector):
     self._clustering: Clustering = cast(
       Clustering,
       module_manager.get_module(
-        "Tteam.HumanDetector.Clustering",
+        "tteam.HumanDetector.Clustering",
         "adf_core_python.implement.module.algorithm.k_means_clustering.KMeansClustering",
       ),
     )
@@ -530,10 +530,10 @@ class SampleHumanDetector(HumanDetector):
     return self._result
 
   # LifeTime用
-  D_NOISE = 0.1 
-  D_K_B = 0.00025 
+  D_NOISE = 0.1
+  D_K_B = 0.00025
   D_K_C = 0.00035
-  D_L_B = 0.01 
+  D_L_B = 0.01
   D_L_C = 0.01
 
   def _life_time(self, hp, damage):

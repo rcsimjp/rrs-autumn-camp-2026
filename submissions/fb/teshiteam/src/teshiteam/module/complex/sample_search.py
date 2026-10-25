@@ -33,7 +33,7 @@ class SampleSearch(Search):
     self._clustering: Clustering = cast(
       Clustering,
       module_manager.get_module(
-        "myteam.Search.Clustering",
+        "teshiteam.Search.Clustering",
         "adf_core_python.implement.module.algorithm.k_means_clustering.KMeansClustering",
       ),
     )
@@ -41,7 +41,7 @@ class SampleSearch(Search):
     self._path_planning: PathPlanning = cast(
       PathPlanning,
       module_manager.get_module(
-        "myteam.Search.PathPlanning",
+        "teshiteam.Search.PathPlanning",
         "src.camp_default_2026.cached_path_planning.CachedPathPlanning",
       ),
     )

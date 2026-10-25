@@ -5,7 +5,7 @@ gateway:
   host: localhost
   port: 27941
 team:
-  name: myteam
+  name: teshiteam
 adf:
   launcher:
     precompute: false

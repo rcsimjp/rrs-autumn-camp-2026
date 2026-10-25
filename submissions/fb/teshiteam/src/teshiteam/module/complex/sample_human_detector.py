@@ -29,7 +29,7 @@ class SampleHumanDetector(HumanDetector):
     self._clustering: Clustering = cast(
       Clustering,
       module_manager.get_module(
-        "myteam.HumanDetector.Clustering",
+        "teshiteam.HumanDetector.Clustering",
         "adf_core_python.implement.module.algorithm.k_means_clustering.KMeansClustering",
       ),
     )
@@ -143,7 +143,7 @@ class SampleHumanDetector(HumanDetector):
     # ダメージが0でも埋没している対象を救出可能にする
 
 
-    
+
     # ダメージ情報が取得できない場合のみ対象外とする
     damage: Optional[int] = target.get_damage()
     if damage is None:
