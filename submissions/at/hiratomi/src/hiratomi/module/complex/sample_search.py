@@ -1,0 +1,98 @@
+from typing import Optional, cast
+
+from rcrscore.entities import Building, Entity, EntityID, Refuge
+
+from adf_core_python.core.agent.communication.message_manager import MessageManager
+from adf_core_python.core.agent.develop.develop_data import DevelopData
+from adf_core_python.core.agent.info.agent_info import AgentInfo
+from adf_core_python.core.agent.info.scenario_info import ScenarioInfo
+from adf_core_python.core.agent.info.world_info import WorldInfo
+from adf_core_python.core.agent.module.module_manager import ModuleManager
+from adf_core_python.core.component.module.algorithm.clustering import Clustering
+from adf_core_python.core.component.module.algorithm.path_planning import PathPlanning
+from adf_core_python.core.component.module.complex.search import Search
+from adf_core_python.core.logger.logger import get_agent_logger
+
+
+class SampleSearch(Search):
+  def __init__(
+    self,
+    agent_info: AgentInfo,
+    world_info: WorldInfo,
+    scenario_info: ScenarioInfo,
+    module_manager: ModuleManager,
+    develop_data: DevelopData,
+  ) -> None:
+    super().__init__(
+      agent_info, world_info, scenario_info, module_manager, develop_data
+    )
+
+    self._unreached_building_ids: set[EntityID] = set()
+    self._result: Optional[EntityID] = None
+
+   
+
+    self._path_planning: PathPlanning = cast(
+      PathPlanning,
+      module_manager.get_module(
+        "hiratomi.Search.PathPlanning",
+        "src.camp_default_2026.cached_path_planning.CachedPathPlanning",
+      ),
+    )
+
+    self._logger = get_agent_logger(
+      f"{self.__class__.__module__}.{self.__class__.__qualname__}",
+      self._agent_info,
+    )
+
+    
+    self.register_sub_module(self._path_planning)
+
+  def update_info(self, message_manager: MessageManager) -> Search:
+    super().update_info(message_manager)
+    if self.get_count_update_info() > 1:
+      return self
+
+    self._logger.debug(
+      f"unreached_building_ids: {[str(id) for id in self._unreached_building_ids]}"
+    )
+
+    searched_building_id = self._agent_info.get_position_entity_id()
+    if searched_building_id is not None:
+      self._unreached_building_ids.discard(searched_building_id)
+
+    if len(self._unreached_building_ids) == 0:
+      self._unreached_building_ids = self._get_search_targets()
+
+    return self
+
+  def calculate(self) -> Search:
+    position = self._agent_info.get_position_entity_id()
+    if position is None:
+      self._result = None
+      return self
+
+    nearest_building_id: Optional[EntityID] = None
+    nearest_distance = float("inf")
+    for building_id in self._unreached_building_ids:
+      distance = self._path_planning.get_distance(position, building_id)
+      if distance < nearest_distance:
+        nearest_building_id = building_id
+        nearest_distance = distance
+    self._result = nearest_building_id
+    return self
+
+  def get_target_entity_id(self) -> Optional[EntityID]:
+    return self._result
+
+  def _get_search_targets(self) -> set[EntityID]:
+    # クラスタリング関連の処理を削除し、マップ全体の建物を取得する
+    all_entities = self._world_info.get_entities_of_types([Building])
+    
+    building_entity_ids: list[EntityID] = [
+      entity.get_entity_id()
+      for entity in all_entities
+      if isinstance(entity, Building) and not isinstance(entity, Refuge)
+    ]
+
+    return set(building_entity_ids)
