@@ -1,0 +1,9 @@
+[project]
+name = "rrs-camp-agent"
+version = "0.1.0"
+requires-python = ">=3.13"
+dependencies = ["adf-core-python", "rcrscore"]
+
+[tool.uv.sources]
+adf-core-python = { git = "https://github.com/adf-python/adf-core-python.git", rev = "c5eaf8d2dae07c0bb1a3227efca9effd4fca110b" }
+rcrscore = { git = "https://github.com/adf-python/rcrs-core-python.git", rev = "582b22f2d0e6667f813d494a3b6110343e780c2c" }
