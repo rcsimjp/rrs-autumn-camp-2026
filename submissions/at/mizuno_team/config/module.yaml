@@ -1,0 +1,86 @@
+DefaultCommandExecutorAmbulance:
+  ExtendActionMove: adf_core_python.implement.action.default_extend_action_move.DefaultExtendActionMove
+  ExtendActionTransport: adf_core_python.implement.action.default_extend_action_transport.DefaultExtendActionTransport
+  PathPlanning: adf_core_python.implement.module.algorithm.a_star_path_planning.AStarPathPlanning
+DefaultCommandExecutorFire:
+  ExtendActionFireRescue: adf_core_python.implement.action.default_extend_action_rescue.DefaultExtendActionRescue
+  ExtendActionMove: adf_core_python.implement.action.default_extend_action_move.DefaultExtendActionMove
+  PathPlanning: adf_core_python.implement.module.algorithm.a_star_path_planning.AStarPathPlanning
+DefaultCommandExecutorPolice:
+  ExtendActionClear: adf_core_python.implement.action.default_extend_action_clear.DefaultExtendActionClear
+  ExtendActionMove: adf_core_python.implement.action.default_extend_action_move.DefaultExtendActionMove
+  PathPlanning: adf_core_python.implement.module.algorithm.a_star_path_planning.AStarPathPlanning
+DefaultCommandExecutorScout:
+  PathPlanning: adf_core_python.implement.module.algorithm.a_star_path_planning.AStarPathPlanning
+DefaultCommandExecutorScoutPolice:
+  ExtendActionClear: adf_core_python.implement.action.default_extend_action_clear.DefaultExtendActionClear
+  PathPlanning: adf_core_python.implement.module.algorithm.a_star_path_planning.AStarPathPlanning
+DefaultExtendActionClear:
+  PathPlanning: adf_core_python.implement.module.algorithm.a_star_path_planning.AStarPathPlanning
+DefaultExtendActionMove:
+  PathPlanning: adf_core_python.implement.module.algorithm.a_star_path_planning.AStarPathPlanning
+DefaultExtendActionRescue:
+  PathPlanning: adf_core_python.implement.module.algorithm.a_star_path_planning.AStarPathPlanning
+DefaultExtendActionTransport:
+  PathPlanning: adf_core_python.implement.module.algorithm.a_star_path_planning.AStarPathPlanning
+DefaultHumanDetector:
+  Clustering: adf_core_python.implement.module.algorithm.k_means_clustering.KMeansClustering
+DefaultRoadDetector:
+  PathPlanning: adf_core_python.implement.module.algorithm.a_star_path_planning.AStarPathPlanning
+DefaultSearch:
+  Clustering: adf_core_python.implement.module.algorithm.k_means_clustering.KMeansClustering
+  PathPlanning: adf_core_python.implement.module.algorithm.a_star_path_planning.AStarPathPlanning
+DefaultTacticsAmbulanceCenter:
+  CommandPicker: adf_core_python.implement.centralized.default_command_picker_ambulance.DefaultCommandPickerAmbulance
+  TargetAllocator: adf_core_python.implement.module.complex.default_ambulance_target_allocator.DefaultAmbulanceTargetAllocator
+DefaultTacticsAmbulanceTeam:
+  CommandExecutorAmbulance: adf_core_python.implement.centralized.default_command_executor_ambulance.DefaultCommandExecutorAmbulance
+  CommandExecutorScout: adf_core_python.implement.centralized.default_command_executor_scout.DefaultCommandExecutorScout
+  ExtendActionMove: adf_core_python.implement.action.default_extend_action_move.DefaultExtendActionMove
+  ExtendActionTransport: adf_core_python.implement.action.default_extend_action_transport.DefaultExtendActionTransport
+  HumanDetector: src.mizuno_team.module.complex.sample_human_detector.SampleHumanDetector
+  Search: src.mizuno_team.module.complex.sample_search.SampleSearch
+DefaultTacticsFireBrigade:
+  CommandExecutorFire: adf_core_python.implement.centralized.default_command_executor_fire.DefaultCommandExecutorFire
+  CommandExecutorScout: adf_core_python.implement.centralized.default_command_executor_scout.DefaultCommandExecutorScout
+  ExtendActionMove: adf_core_python.implement.action.default_extend_action_move.DefaultExtendActionMove
+  ExtendActionRescue: adf_core_python.implement.action.default_extend_action_rescue.DefaultExtendActionRescue
+  HumanDetector: src.camp_default_2026.fb.module.complex.sample_human_detector.SampleHumanDetector
+  Search: src.camp_default_2026.fb.module.complex.sample_search.SampleSearch
+DefaultTacticsFireStation:
+  CommandPicker: adf_core_python.implement.centralized.default_command_picker_fire.DefaultCommandPickerFire
+  TargetAllocator: adf_core_python.implement.module.complex.default_fire_target_allocator.DefaultFireTargetAllocator
+DefaultTacticsPoliceForce:
+  CommandExecutorPolice: adf_core_python.implement.centralized.default_command_executor_police.DefaultCommandExecutorPolice
+  CommandExecutorScout: adf_core_python.implement.centralized.default_command_executor_scout.DefaultCommandExecutorScout
+  ExtendActionClear: adf_core_python.implement.action.default_extend_action_clear.DefaultExtendActionClear
+  ExtendActionMove: adf_core_python.implement.action.default_extend_action_move.DefaultExtendActionMove
+  RoadDetector: adf_core_python.implement.module.complex.default_road_detector.DefaultRoadDetector
+  Search: adf_core_python.implement.module.complex.default_search.DefaultSearch
+DefaultTacticsPoliceOffice:
+  CommandPicker: adf_core_python.implement.centralized.default_command_picker_police.DefaultCommandPickerPolice
+  TargetAllocator: adf_core_python.implement.module.complex.default_police_target_allocator.DefaultPoliceTargetAllocator
+MessageManager:
+  CenterChannelSubscriber: adf_core_python.implement.module.communication.default_channel_subscriber.DefaultChannelSubscriber
+  CenterMessageCoordinator: adf_core_python.implement.module.communication.default_message_coordinator.DefaultMessageCoordinator
+  PlatoonChannelSubscriber: adf_core_python.implement.module.communication.default_channel_subscriber.DefaultChannelSubscriber
+  PlatoonMessageCoordinator: adf_core_python.implement.module.communication.default_message_coordinator.DefaultMessageCoordinator
+camp_default_2026:
+  at:
+    HumanDetector:
+      Clustering: adf_core_python.implement.module.algorithm.k_means_clustering.KMeansClustering
+    Search:
+      Clustering: adf_core_python.implement.module.algorithm.k_means_clustering.KMeansClustering
+      PathPlanning: src.camp_default_2026.cached_path_planning.CachedPathPlanning
+  fb:
+    HumanDetector:
+      Clustering: adf_core_python.implement.module.algorithm.k_means_clustering.KMeansClustering
+    Search:
+      Clustering: adf_core_python.implement.module.algorithm.k_means_clustering.KMeansClustering
+      PathPlanning: src.camp_default_2026.cached_path_planning.CachedPathPlanning
+mizuno_team:
+  HumanDetector:
+    Clustering: adf_core_python.implement.module.algorithm.k_means_clustering.KMeansClustering
+  Search:
+    Clustering: adf_core_python.implement.module.algorithm.k_means_clustering.KMeansClustering
+    PathPlanning: src.camp_default_2026.cached_path_planning.CachedPathPlanning
